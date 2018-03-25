@@ -2,35 +2,68 @@
 
 <ScrollView>
   <StackLayout class="page">
-    <StackLayout class="form">
 
+    <StackLayout class="form" [formGroup]="form">
+      <!-- name -->
       <StackLayout class="input-field">
         <Label text="Nome" class="label font-weight-bold m-b-5"></Label>
-        <TextField class="input"></TextField>
+        <TextField class="input" formControlName="name"></TextField>
         <StackLayout class="hr-light"></StackLayout>
+
+        <StackLayout *ngIf="form.get('name').invalid && form.get('name').dirty">
+            <Label *ngIf="form.get('name').errors.required" text="Nome é obrigatório" class="text-right text-danger"></Label>
+            <Label *ngIf="form.get('name').errors.minlength" text="No mínimo 5 caracteres" class="text-right text-danger"></Label>
+            <Label *ngIf="form.get('name').errors.maxlength" text="No máximo 100 caracteres" class="text-right text-danger"></Label>
+        </StackLayout>
       </StackLayout>
 
+      <!-- email -->
       <StackLayout class="input-field">
         <Label text="E-mail" class="label font-weight-bold m-b-5"></Label>
-        <TextField class="input" keyboardType="email" autocapitalizationType="none" autocorrect="false"></TextField>
+        <TextField class="input" formControlName="email" keyboardType="email" autocapitalizationType="none" autocorrect="false"></TextField>
         <StackLayout class="hr-light"></StackLayout>
+
+        <StackLayout *ngIf="form.get('email').invalid && form.get('email').dirty">
+            <Label *ngIf="form.get('email').errors.required" text="Email é obrigatório" class="text-right text-danger"></Label>
+            <Label *ngIf="form.get('email').errors.email" text="Formato inválido" class="text-right text-danger"></Label>
+        </StackLayout>
       </StackLayout>
 
+      <!-- password -->
       <StackLayout class="input-field">
         <Label text="Senha" class="label font-weight-bold m-b-5"></Label>
-        <TextField class="input" secure="true"></TextField>
+        <TextField class="input" formControlName="password" secure="true"></TextField>
         <StackLayout class="hr-light"></StackLayout>
+
+        <StackLayout *ngIf="form.get('password').invalid && form.get('password').dirty">
+            <Label *ngIf="form.get('password').errors.required" text="Senha é obrigatória" class="text-right text-danger"></Label>
+            <Label *ngIf="form.get('password').errors.minlength" text="No mínimo 8 caracteres" class="text-right text-danger"></Label>
+        </StackLayout>
       </StackLayout>
 
+      <!-- password confirmation -->
       <StackLayout class="input-field">
         <Label text="Confirmação de Senha" class="label font-weight-bold m-b-5"></Label>
-        <TextField class="input" secure="true"></TextField>
+        <TextField class="input" formControlName="passwordConfirmation" secure="true"></TextField>
         <StackLayout class="hr-light"></StackLayout>
+
+        <StackLayout *ngIf="form.get('passwordConfirmation').invalid && form.get('passwordConfirmation').dirty">
+            <Label *ngIf="form.get('passwordConfirmation').errors.required" text="Confirmação é obrigatória" class="text-right text-danger"></Label>
+            <Label *ngIf="form.get('passwordConfirmation').errors.mismatch" text="Não confere com a senha" class="text-right text-danger"></Label>
+        </StackLayout>
       </StackLayout>
 
-      <Button text="Criar conta" class="btn btn-primary"></Button>
+      <!-- errors -->
+      <StackLayout class="formErrors" *ngIf="formErrors">
+        <Label class="font-weight-bold" text="Ocorreu um erro na criação da sua conta"></Label>
+        <Label *ngFor="let error of formErrors" [text]="error" class="text-danger" textWrap="true"></Label>
+      </StackLayout>
+
+      <!-- Buttons -->
+      <Button [isEnabled]="form.valid && !submitted" (tap)="signUpUser()" text="Criar conta" class="btn btn-primary"></Button>
       <Button text="Login" class="btn btn-outline" nsRouterLink="/sign-in" pageTransition="slideBottom"></Button>
 
     </StackLayout>
+
   </StackLayout>
 </ScrollView>

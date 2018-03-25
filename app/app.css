@@ -10,3 +10,9 @@ of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
 @import '~nativescript-theme-core/css/forest.css';
+
+.formErrors {
+  background-color: #f4d7d8;
+  margin: 20px;
+  padding: 10px;
+}
