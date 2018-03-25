@@ -10,6 +10,7 @@ import { AppComponent } from "./app.component";
 // import { NativeScriptHttpModule } from "nativescript-angular/http";
 
 import { SignInComponent } from "./sign-in/sign-in.component";
+import { SignUpComponent } from "./sign-up/sign-up.component";
 
 @NgModule({
     bootstrap: [
@@ -22,6 +23,7 @@ import { SignInComponent } from "./sign-in/sign-in.component";
     declarations: [
         AppComponent,
         SignInComponent,
+        SignUpComponent,
     ],
     providers: [
     ],
