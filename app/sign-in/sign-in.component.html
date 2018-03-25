@@ -1,23 +1,23 @@
-<ActionBar title="Login" class="action-bar"></ActionBar>
+<ActionBar title="TaskManager - Login" class="action-bar"></ActionBar>
 
-<StackLayout class="page">
+<ScrollView>
+  <StackLayout class="page">
+    <StackLayout class="form">
+      <Image src="~/images/logo.png"></Image>
 
-  <Image src="~/images/app_icon.jpg" stretch="false" horizontalAlignment="center" class="m-20"></Image>
+      <StackLayout class="input-field">
+        <Label text="E-mail" class="label font-weight-bold m-b-5"></Label>
+        <TextField class="input" keyboardType="email" autocapitalizationType="none" autocorrect="false"></TextField>
+        <StackLayout class="hr-light"></StackLayout>
+      </StackLayout>
 
-  <StackLayout class="form">
-    <StackLayout class="input-field">
-      <Label text="E-mail" class="label font-weight-bold m-b-5"></Label>
-      <TextField class="input" keyboardType="email" autocapitalizationType="none" autocorrect="false"></TextField>
-      <StackLayout class="hr-light"></StackLayout>
+      <StackLayout class="input-field">
+        <Label text="Senha" class="label font-weight-bold m-b-5"></Label>
+        <TextField class="input" secure="true"></TextField>
+        <StackLayout class="hr-light"></StackLayout>
+      </StackLayout>
+
+      <Button text="Login" class="btn btn-primary"></Button>
     </StackLayout>
-
-    <StackLayout class="input-field">
-      <Label text="Senha" class="label font-weight-bold m-b-5"></Label>
-      <TextField class="input" secure="true"></TextField>
-      <StackLayout class="hr-light"></StackLayout>
-    </StackLayout>
-
-    <Button text="Login" class="btn btn-primary"></Button>
   </StackLayout>
-
-</StackLayout>
+</ScrollView>
