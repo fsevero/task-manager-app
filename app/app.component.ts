@@ -18,12 +18,5 @@ export class AppComponent {
         }
       }
     });
-
-    this.tokenService.signIn({
-      email: 'severo.fabricio@gmail.com',
-      password: '123123123'
-    }).subscribe(
-      response => console.dir(response)
-    );
   }
 }
