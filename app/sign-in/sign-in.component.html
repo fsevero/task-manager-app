@@ -2,22 +2,41 @@
 
 <ScrollView>
   <StackLayout class="page">
-    <StackLayout class="form">
+    <StackLayout class="form" [formGroup]="form">
+      <!-- imagem login -->
       <Image src="~/images/logo.png"></Image>
 
+      <!-- email -->
       <StackLayout class="input-field">
         <Label text="E-mail" class="label font-weight-bold m-b-5"></Label>
-        <TextField class="input" keyboardType="email" autocapitalizationType="none" autocorrect="false"></TextField>
+        <TextField class="input" formControlName="email" keyboardType="email" autocapitalizationType="none" autocorrect="false"></TextField>
         <StackLayout class="hr-light"></StackLayout>
+
+        <StackLayout *ngIf="form.get('email').invalid && form.get('email').dirty">
+            <Label *ngIf="form.get('email').errors.required" text="Email não informado" class="text-right text-danger"></Label>
+            <Label *ngIf="form.get('email').errors.email" text="Formato inválido" class="text-right text-danger"></Label>
+        </StackLayout>
       </StackLayout>
 
+      <!-- password -->
       <StackLayout class="input-field">
         <Label text="Senha" class="label font-weight-bold m-b-5"></Label>
-        <TextField class="input" secure="true"></TextField>
+        <TextField class="input" formControlName="password" secure="true"></TextField>
         <StackLayout class="hr-light"></StackLayout>
+
+        <StackLayout *ngIf="form.get('password').invalid && form.get('password').dirty">
+            <Label *ngIf="form.get('password').errors.required" text="Senha não informada" class="text-right text-danger"></Label>
+        </StackLayout>
       </StackLayout>
 
-      <Button text="Login" class="btn btn-primary"></Button>
+      <!-- errors -->
+      <StackLayout class="formErrors" *ngIf="formErrors">
+        <Label class="font-weight-bold" text="Ocorreu um erro durante o login"></Label>
+        <Label *ngFor="let error of formErrors" [text]="error" class="text-danger" textWrap="true"></Label>
+      </StackLayout>
+
+      <!-- buttons -->
+      <Button [isEnabled]="form.valid && !submitted" (tap)="signInUser()"  text="Login" class="btn btn-primary"></Button>
       <Button text="Cadastrar-se" class="btn btn-outline" nsRouterLink="/sign-up" pageTransition="slideTop"></Button>
     </StackLayout>
   </StackLayout>
